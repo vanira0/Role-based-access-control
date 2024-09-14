@@ -3,11 +3,14 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const methodOverride = require('method-override');
 
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const protectedRoutes = require('./routes/protectedRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
@@ -28,10 +31,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+// MethodOverride
+app.use(methodOverride('_method'));
 
 // Routes
 app.use('/auth', authRoutes);
 app.use('/protected', protectedRoutes);
+app.use('/admin', adminRoutes);
 
 // Public route
 app.get('/', (req, res) => {

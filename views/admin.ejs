@@ -8,6 +8,10 @@
     <body>
         <h1>Welcome to Admin Area</h1>
         <p>Your role: <%= role %></p>
+
+        <a href="/admin/users">Manage User Roles</a>
+        <br />
+        <a href="/admin/update-admin-role">Update Your Role</a>
         <form action="/auth/logout" method="POST">
             <button type="submit">Logout</button>
         </form>
